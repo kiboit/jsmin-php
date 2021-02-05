@@ -151,6 +151,12 @@ class JSMinTest extends \PHPUnit_Framework_TestCase {
 				continue;
 			}
 
+            if (getenv('JSMIN_TEST_FILES') !== false
+                && !in_array($testFile, explode(',', getenv('JSMIN_TEST_FILES')))
+            ) {
+                continue;
+            }
+
 			$testInput = file_get_contents($testDir . $testFile);
 			$expectedOutput = file_get_contents($expectDir . $testFile);
 			$actualFile = $actualDir . $testFile;
